@@ -28,11 +28,12 @@ class NESControllerInterface {
     NESControllerInterface(uint8_t dataPin, uint8_t loadPin, uint8_t clockPin);
 
     /**
-     * @brief Read the raw data from the NES controller.
+     * @brief Read the data from the NES controller as a byte. If the controller
+     * is disconnected, 255 will be returned.
      *
-     * @return The raw data from the NES controller.
+     * @return The data from the NES controller.
      */
-    uint8_t readRaw();
+    uint8_t read();
 
    private:
     /**
@@ -47,6 +48,13 @@ class NESControllerInterface {
      * @brief The pin connected to the clock pin on the shift register.
      */
     uint8_t _clockPin;
+
+    /**
+     * @brief Read the raw data from the NES controller.
+     *
+     * @return The raw data from the NES controller.
+     */
+    uint8_t _readRaw();
 };
 
 #endif  // NES_CONTROLLER_INTERFACE_H

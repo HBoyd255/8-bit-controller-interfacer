@@ -29,33 +29,46 @@ void setup() {
 
 void loop() {
     // Read the data from the shift register.
-    byte data = nes.readRaw();
-
-    // For the data received to be 0, either all buttons are pressed (which is
-    // not possible on the NES controller) or the controller is not connected.
-    bool controllerConnected = !(data == 0);
-
-    // TODO Make the criteria fpr the controller being disconnected "Up and down
-    // buttons pressed at the same time, or left and right buttons pressed at
-    // the same time."
+    byte data = nes.read();
 
     // Print the received data to the serial port.
-    printByte(data, ",");
-
-    Serial.print(" controllerConnected: ");
-    Serial.println(controllerConnected);
-    Serial.println();
+    // printByte(data, ",");
 
     // Break the byte into its individual bits.
     // The values are inverted because the buttons are pulled low when pressed.
-    bool button_a = (!(data & 128) && controllerConnected);
-    bool button_b = (!(data & 64) && controllerConnected);
-    bool button_select = (!(data & 32) && controllerConnected);
-    bool button_start = (!(data & 16) && controllerConnected);
-    bool button_up = (!(data & 8) && controllerConnected);
-    bool button_down = (!(data & 4) && controllerConnected);
-    bool button_left = (!(data & 2) && controllerConnected);
-    bool button_right = (!(data & 1) && controllerConnected);
+    bool button_a = !(data & 128);
+    bool button_b = !(data & 64);
+    bool button_select = !(data & 32);
+    bool button_start = !(data & 16);
+    bool button_up = !(data & 8);
+    bool button_down = !(data & 4);
+    bool button_left = !(data & 2);
+    bool button_right = !(data & 1);
+
+    // if (button_a) {
+    //     Serial.println("A");
+    // }
+    // if (button_b) {
+    //     Serial.println("B");
+    // }
+    // if (button_select) {
+    //     Serial.println("SELECT");
+    // }
+    // if (button_start) {
+    //     Serial.println("START");
+    // }
+    // if (button_up) {
+    //     Serial.println("UP");
+    // }
+    // if (button_down) {
+    //     Serial.println("DOWN");
+    // }
+    // if (button_left) {
+    //     Serial.println("LEFT");
+    // }
+    // if (button_right) {
+    //     Serial.println("RIGHT");
+    // }
 
     // This is the configuration for the game Bit Blaster XL
     updateKey(button_a, KEY_LEFT_CTRL);

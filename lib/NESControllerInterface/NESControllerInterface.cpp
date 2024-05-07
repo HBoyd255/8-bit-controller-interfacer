@@ -18,9 +18,33 @@
 NESControllerInterface::NESControllerInterface(uint8_t dataPin, uint8_t loadPin,
                                                uint8_t clockPin)
     : _dataPin(dataPin), _loadPin(loadPin), _clockPin(clockPin) {
-    pinMode(dataPin, INPUT);
+    pinMode(dataPin, INPUT_PULLUP);
     pinMode(loadPin, OUTPUT);
     pinMode(clockPin, OUTPUT);
+}
+/**
+ * @brief Read the data from the NES controller as a byte. If the up and
+ * down buttons are pressed at the same time, or the left and right buttons
+ * are pressed at the same time, the function will return 255, to indicate
+ * that the controller is disconnected.
+ *
+ * @return The data from the NES controller.
+ */
+uint8_t NESControllerInterface::read() {
+    uint8_t rawData = this->_readRaw();
+
+    bool up_pressed = (!(rawData & 8));
+    bool down_pressed = (!(rawData & 4));
+    bool left_pressed = (!(rawData & 2));
+    bool right_pressed = (!(rawData & 1));
+
+    if (up_pressed && down_pressed) {
+        return 255;
+    } else if (left_pressed && right_pressed) {
+        return 255;
+    }
+
+    return rawData;
 }
 
 /**
@@ -28,7 +52,7 @@ NESControllerInterface::NESControllerInterface(uint8_t dataPin, uint8_t loadPin,
  *
  * @return The raw data from the NES controller.
  */
-uint8_t NESControllerInterface::readRaw() {
+uint8_t NESControllerInterface::_readRaw() {
     // Create a byte for storing the received data from the shift register.
     byte shiftRegisterContents = 0;
 
