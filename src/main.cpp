@@ -1,31 +1,35 @@
-
+/**
+ * @file main.cpp
+ * @brief This is the top-level file for the NES to USB HID converter.
+ *
+ * @author Harry Boyd - https://github.com/HBoyd255
+ * @date 2024-05-07
+ * @copyright Copyright (c) 2024
+ */
 
 #include <Arduino.h>
 #include <Keyboard.h>
+#include <NESControllerInterface.h>
 
 #include "pinDefinitions.h"
 
 // https://www.arduino.cc/reference/en/language/functions/usb/keyboard/keyboardmodifiers/
 
-byte read8BitShiftReg();
 void printByte(byte, String);
 void updateKey(bool pressed, unsigned char key);
+
+NESControllerInterface nes(DATA_PIN, LOAD_PIN, CLOCK_PIN);
 
 void setup() {
     // Begin serial communication.
     Serial.begin(9600);
-
-    // Define pin modes.
-    pinMode(DATA_PIN, INPUT);
-    pinMode(LOAD_PIN, OUTPUT);
-    pinMode(CLOCK_PIN, OUTPUT);
 
     Keyboard.begin();
 }
 
 void loop() {
     // Read the data from the shift register.
-    byte data = read8BitShiftReg();
+    byte data = nes.readRaw();
 
     // For the data received to be 0, either all buttons are pressed (which is
     // not possible on the NES controller) or the controller is not connected.
@@ -62,41 +66,6 @@ void loop() {
     updateKey(button_down, KEY_DOWN_ARROW);
     updateKey(button_left, KEY_LEFT_ARROW);
     updateKey(button_right, KEY_RIGHT_ARROW);
-}
-
-/**
- * @brief Reads the data from the a 8-bit shift register.
- *
- * @return (byte) The data from the a 8-bit shift register.
- */
-byte read8BitShiftReg() {
-    // Create a byte for storing the received data from the shift register.
-    byte shiftRegisterContents = 0;
-
-    // Load the data into the shift register by sending a pulse to the load
-    // pin.
-    digitalWrite(LOAD_PIN, LOW);
-    delayMicroseconds(10);
-    digitalWrite(LOAD_PIN, HIGH);
-    delayMicroseconds(10);
-    digitalWrite(LOAD_PIN, LOW);
-
-    // For of the 8 bits in a byte.
-    for (int i = 0; i < 8; i++) {
-        // Shift the received data up by one.
-        shiftRegisterContents <<= 1;
-
-        // Load the available bit from the shift register into the lsb of
-        // the received data byte.
-        shiftRegisterContents |= digitalRead(DATA_PIN);
-
-        // Pulse the clock pin to shift the data inside the shift register.
-        digitalWrite(CLOCK_PIN, LOW);
-        delayMicroseconds(10);
-        digitalWrite(CLOCK_PIN, HIGH);
-        delayMicroseconds(10);
-    }
-    return shiftRegisterContents;
 }
 
 /**
