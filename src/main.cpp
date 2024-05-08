@@ -36,49 +36,50 @@ void loop() {
 
     // Break the byte into its individual bits.
     // The values are inverted because the buttons are pulled low when pressed.
-    bool button_a = !(data & 128);
-    bool button_b = !(data & 64);
-    bool button_select = !(data & 32);
-    bool button_start = !(data & 16);
-    bool button_up = !(data & 8);
-    bool button_down = !(data & 4);
-    bool button_left = !(data & 2);
-    bool button_right = !(data & 1);
+    bool buttonA = !(data & 128);
+    bool buttonB = !(data & 64);
+    bool buttonSelect = !(data & 32);
+    bool buttonStart = !(data & 16);
+    bool buttonUp = !(data & 8);
+    bool buttonDown = !(data & 4);
+    bool buttonLeft = !(data & 2);
+    bool buttonRight = !(data & 1);
 
-    // if (button_a) {
-    //     Serial.println("A");
-    // }
-    // if (button_b) {
-    //     Serial.println("B");
-    // }
-    // if (button_select) {
-    //     Serial.println("SELECT");
-    // }
-    // if (button_start) {
-    //     Serial.println("START");
-    // }
-    // if (button_up) {
-    //     Serial.println("UP");
-    // }
-    // if (button_down) {
-    //     Serial.println("DOWN");
-    // }
-    // if (button_left) {
-    //     Serial.println("LEFT");
-    // }
-    // if (button_right) {
-    //     Serial.println("RIGHT");
-    // }
+    if (buttonA) {
+        Serial.println("A");
+    }
+    if (buttonB) {
+        Serial.println("B");
+    }
+    if (buttonSelect) {
+        Serial.println("SELECT");
+    }
+    if (buttonStart) {
+        Serial.println("START");
+    }
+    if (buttonUp) {
+        Serial.println("UP");
+    }
+    if (buttonDown) {
+        Serial.println("DOWN");
+    }
+    if (buttonLeft) {
+        Serial.println("LEFT");
+    }
+    if (buttonRight) {
+        Serial.println("RIGHT");
+    }
 
-    // This is the configuration for the game Bit Blaster XL
-    updateKey(button_a, KEY_LEFT_CTRL);
-    updateKey(button_b, KEY_LEFT_ALT);
-    updateKey(button_select, KEY_ESC);
-    updateKey(button_start, KEY_RETURN);
-    updateKey(button_up, KEY_UP_ARROW);
-    updateKey(button_down, KEY_DOWN_ARROW);
-    updateKey(button_left, KEY_LEFT_ARROW);
-    updateKey(button_right, KEY_RIGHT_ARROW);
+    // This is the configuration for the game Bit Blaster XL.
+
+    updateKey(buttonA, KEY_LEFT_CTRL);
+    updateKey(buttonB, KEY_LEFT_ALT);
+    updateKey(buttonSelect, KEY_ESC);
+    updateKey(buttonStart, KEY_RETURN);
+    updateKey(buttonUp, KEY_UP_ARROW);
+    updateKey(buttonDown, KEY_DOWN_ARROW);
+    updateKey(buttonLeft, KEY_LEFT_ARROW);
+    updateKey(buttonRight, KEY_RIGHT_ARROW);
 }
 
 /**
