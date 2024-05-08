@@ -32,6 +32,13 @@ struct NESInput {
      * @return false If no buttons are pressed.
      */
     bool anyButtonPressed();
+
+    /**
+     * @brief Get a string representing the state of the NESInput object.
+     *
+     * @return String representing the state of the NESInput object.
+     */
+    String statesAsString();
 };
 
 /**

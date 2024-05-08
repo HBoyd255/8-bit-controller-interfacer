@@ -31,44 +31,17 @@ void loop() {
     // Get the data from the NES controller, as a struct.
     NESInput input = nes.getNESInput();
 
-    if (input.anyButtonPressed()) {
-        Serial.println("Something was pressed.");
-    }
-
-    if (input.buttonA) {
-        Serial.println("A");
-    }
-    if (input.buttonB) {
-        Serial.println("B");
-    }
-    if (input.buttonSelect) {
-        Serial.println("SELECT");
-    }
-    if (input.buttonStart) {
-        Serial.println("START");
-    }
-    if (input.buttonUp) {
-        Serial.println("UP");
-    }
-    if (input.buttonDown) {
-        Serial.println("DOWN");
-    }
-    if (input.buttonLeft) {
-        Serial.println("LEFT");
-    }
-    if (input.buttonRight) {
-        Serial.println("RIGHT");
-    }
+    Serial.println(input.statesAsString());
 
     // This is the configuration for the game Bit Blaster XL.
-    // updateKey(input.buttonA, KEY_LEFT_CTRL);
-    // updateKey(input.buttonB, KEY_LEFT_ALT);
-    // updateKey(input.buttonSelect, KEY_ESC);
-    // updateKey(input.buttonStart, KEY_RETURN);
-    // updateKey(input.buttonUp, KEY_UP_ARROW);
-    // updateKey(input.buttonDown, KEY_DOWN_ARROW);
-    // updateKey(input.buttonLeft, KEY_LEFT_ARROW);
-    // updateKey(input.buttonRight, KEY_RIGHT_ARROW);
+    updateKey(input.buttonA, KEY_LEFT_CTRL);
+    updateKey(input.buttonB, KEY_LEFT_ALT);
+    updateKey(input.buttonSelect, KEY_ESC);
+    updateKey(input.buttonStart, KEY_RETURN);
+    updateKey(input.buttonUp, KEY_UP_ARROW);
+    updateKey(input.buttonDown, KEY_DOWN_ARROW);
+    updateKey(input.buttonLeft, KEY_LEFT_ARROW);
+    updateKey(input.buttonRight, KEY_RIGHT_ARROW);
 }
 
 /**

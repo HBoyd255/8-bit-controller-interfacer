@@ -20,6 +20,31 @@ bool NESInput::anyButtonPressed() {
 }
 
 /**
+ * @brief Get a string representing the state of the NESInput object.
+ *
+ * @return String representing the state of the NESInput object.
+ */
+String NESInput::statesAsString() {
+    // Create a string to store the state of the struct.
+    String stringToReturn;
+
+    // Add the state of each button to the string.
+    stringToReturn += "NESInput:[";
+    stringToReturn += "A:" + String(buttonA) + ",";
+    stringToReturn += " B:" + String(buttonB) + ",";
+    stringToReturn += " SELECT:" + String(buttonSelect) + ",";
+    stringToReturn += " START:" + String(buttonStart) + ",";
+    stringToReturn += " UP:" + String(buttonUp) + ",";
+    stringToReturn += " DOWN:" + String(buttonDown) + ",";
+    stringToReturn += " LEFT:" + String(buttonLeft) + ",";
+    stringToReturn += " RIGHT:" + String(buttonRight);
+    stringToReturn += "]";
+
+    // Return the string.
+    return stringToReturn;
+}
+
+/**
  * @brief Construct a new NESControllerInterface object.
  *
  * @param dataPin The pin connected to the data pin on the shift register.
