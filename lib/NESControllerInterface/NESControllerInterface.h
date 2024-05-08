@@ -24,6 +24,14 @@ struct NESInput {
     bool buttonDown;
     bool buttonLeft;
     bool buttonRight;
+
+    /**
+     * @brief Check if any button is pressed.
+     *
+     * @return true If any button is pressed.
+     * @return false If no buttons are pressed.
+     */
+    bool anyButtonPressed();
 };
 
 /**

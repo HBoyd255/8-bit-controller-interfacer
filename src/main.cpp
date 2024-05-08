@@ -31,6 +31,10 @@ void loop() {
     // Get the data from the NES controller, as a struct.
     NESInput input = nes.getNESInput();
 
+    if (input.anyButtonPressed()) {
+        Serial.println("Something was pressed.");
+    }
+
     if (input.buttonA) {
         Serial.println("A");
     }
@@ -57,14 +61,14 @@ void loop() {
     }
 
     // This is the configuration for the game Bit Blaster XL.
-    updateKey(input.buttonA, KEY_LEFT_CTRL);
-    updateKey(input.buttonB, KEY_LEFT_ALT);
-    updateKey(input.buttonSelect, KEY_ESC);
-    updateKey(input.buttonStart, KEY_RETURN);
-    updateKey(input.buttonUp, KEY_UP_ARROW);
-    updateKey(input.buttonDown, KEY_DOWN_ARROW);
-    updateKey(input.buttonLeft, KEY_LEFT_ARROW);
-    updateKey(input.buttonRight, KEY_RIGHT_ARROW);
+    // updateKey(input.buttonA, KEY_LEFT_CTRL);
+    // updateKey(input.buttonB, KEY_LEFT_ALT);
+    // updateKey(input.buttonSelect, KEY_ESC);
+    // updateKey(input.buttonStart, KEY_RETURN);
+    // updateKey(input.buttonUp, KEY_UP_ARROW);
+    // updateKey(input.buttonDown, KEY_DOWN_ARROW);
+    // updateKey(input.buttonLeft, KEY_LEFT_ARROW);
+    // updateKey(input.buttonRight, KEY_RIGHT_ARROW);
 }
 
 /**

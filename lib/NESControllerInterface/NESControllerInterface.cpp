@@ -9,6 +9,17 @@
 #include "NESControllerInterface.h"
 
 /**
+ * @brief Check if any button is pressed.
+ *
+ * @return true If any button is pressed.
+ * @return false If no buttons are pressed.
+ */
+bool NESInput::anyButtonPressed() {
+    return buttonA || buttonB || buttonSelect || buttonStart || buttonUp ||
+           buttonDown || buttonLeft || buttonRight;
+}
+
+/**
  * @brief Construct a new NESControllerInterface object.
  *
  * @param dataPin The pin connected to the data pin on the shift register.
