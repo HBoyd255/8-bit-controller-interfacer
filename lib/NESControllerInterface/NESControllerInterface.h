@@ -13,6 +13,20 @@
 #include <Arduino.h>
 
 /**
+ * @brief A struct to store the values of the NES controller buttons.
+ */
+struct NESInput {
+    bool buttonA;
+    bool buttonB;
+    bool buttonSelect;
+    bool buttonStart;
+    bool buttonUp;
+    bool buttonDown;
+    bool buttonLeft;
+    bool buttonRight;
+};
+
+/**
  * @brief This class is used to interface with an NES controller using a 4021
  * shift register.
  */
@@ -34,6 +48,14 @@ class NESControllerInterface {
      * @return The data from the NES controller.
      */
     uint8_t read();
+
+    /**
+     * @brief Get the NESInput object, representing the state of the NES
+     * controller.
+     *
+     * @return NESInput The state of the NES controller's buttons.
+     */
+    NESInput getNESInput();
 
    private:
     /**

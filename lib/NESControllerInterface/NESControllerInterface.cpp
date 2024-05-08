@@ -48,6 +48,35 @@ uint8_t NESControllerInterface::read() {
 }
 
 /**
+ * @brief Get the NESInput object, representing the state of the NES
+ * controller.
+ *
+ * @return NESInput The state of the NES controller's buttons.
+ */
+NESInput NESControllerInterface::getNESInput() {
+    // Get the data from the NES controller, as a byte.
+    uint8_t data = this->read();
+
+    // Create an NESInput object to store the state of the NES controller.
+    NESInput inputToReturn;
+
+    // Break the byte into its individual bits, and store them in the NESInput
+    // struct. The values are inverted because the buttons are pulled low when
+    // pressed.
+    inputToReturn.buttonA = !(data & 128);
+    inputToReturn.buttonB = !(data & 64);
+    inputToReturn.buttonSelect = !(data & 32);
+    inputToReturn.buttonStart = !(data & 16);
+    inputToReturn.buttonUp = !(data & 8);
+    inputToReturn.buttonDown = !(data & 4);
+    inputToReturn.buttonLeft = !(data & 2);
+    inputToReturn.buttonRight = !(data & 1);
+
+    // Return the NESInput object.
+    return inputToReturn;
+}
+
+/**
  * @brief Read the raw data from the NES controller.
  *
  * @return The raw data from the NES controller.

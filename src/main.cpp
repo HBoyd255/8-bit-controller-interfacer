@@ -28,58 +28,43 @@ void setup() {
 }
 
 void loop() {
-    // Read the data from the shift register.
-    byte data = nes.read();
+    // Get the data from the NES controller, as a struct.
+    NESInput input = nes.getNESInput();
 
-    // Print the received data to the serial port.
-    // printByte(data, ",");
-
-    // Break the byte into its individual bits.
-    // The values are inverted because the buttons are pulled low when pressed.
-    bool buttonA = !(data & 128);
-    bool buttonB = !(data & 64);
-    bool buttonSelect = !(data & 32);
-    bool buttonStart = !(data & 16);
-    bool buttonUp = !(data & 8);
-    bool buttonDown = !(data & 4);
-    bool buttonLeft = !(data & 2);
-    bool buttonRight = !(data & 1);
-
-    if (buttonA) {
+    if (input.buttonA) {
         Serial.println("A");
     }
-    if (buttonB) {
+    if (input.buttonB) {
         Serial.println("B");
     }
-    if (buttonSelect) {
+    if (input.buttonSelect) {
         Serial.println("SELECT");
     }
-    if (buttonStart) {
+    if (input.buttonStart) {
         Serial.println("START");
     }
-    if (buttonUp) {
+    if (input.buttonUp) {
         Serial.println("UP");
     }
-    if (buttonDown) {
+    if (input.buttonDown) {
         Serial.println("DOWN");
     }
-    if (buttonLeft) {
+    if (input.buttonLeft) {
         Serial.println("LEFT");
     }
-    if (buttonRight) {
+    if (input.buttonRight) {
         Serial.println("RIGHT");
     }
 
     // This is the configuration for the game Bit Blaster XL.
-
-    updateKey(buttonA, KEY_LEFT_CTRL);
-    updateKey(buttonB, KEY_LEFT_ALT);
-    updateKey(buttonSelect, KEY_ESC);
-    updateKey(buttonStart, KEY_RETURN);
-    updateKey(buttonUp, KEY_UP_ARROW);
-    updateKey(buttonDown, KEY_DOWN_ARROW);
-    updateKey(buttonLeft, KEY_LEFT_ARROW);
-    updateKey(buttonRight, KEY_RIGHT_ARROW);
+    updateKey(input.buttonA, KEY_LEFT_CTRL);
+    updateKey(input.buttonB, KEY_LEFT_ALT);
+    updateKey(input.buttonSelect, KEY_ESC);
+    updateKey(input.buttonStart, KEY_RETURN);
+    updateKey(input.buttonUp, KEY_UP_ARROW);
+    updateKey(input.buttonDown, KEY_DOWN_ARROW);
+    updateKey(input.buttonLeft, KEY_LEFT_ARROW);
+    updateKey(input.buttonRight, KEY_RIGHT_ARROW);
 }
 
 /**
