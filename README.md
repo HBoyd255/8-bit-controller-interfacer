@@ -1,7 +1,7 @@
-# 8-bit Controller Interfacer
+# NES Controller Interface
 
 <!-- Harry Boyd - hboyd255@gmail.com - 06/05/2024 -->
 
-This is the software for the 8-bit Controller Interfacer. This software reads a
-byte from a 4021 shift register and uses it to send usb keyboard commands to a
-computer.
+This is the software for the NES Controller Interface. This software reads the
+data from the 4021 shift register inside of an NES controller, which is then
+used to send USB commends to a computer.
