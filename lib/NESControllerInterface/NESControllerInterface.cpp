@@ -26,22 +26,66 @@ bool NESInput::anyButtonPressed() {
  */
 String NESInput::statesAsString() {
     // Create a string to store the state of the struct.
-    String stringToReturn;
+    String output;
 
     // Add the state of each button to the string.
-    stringToReturn += "NESInput:[";
-    stringToReturn += "A:" + String(buttonA) + ",";
-    stringToReturn += " B:" + String(buttonB) + ",";
-    stringToReturn += " SELECT:" + String(buttonSelect) + ",";
-    stringToReturn += " START:" + String(buttonStart) + ",";
-    stringToReturn += " UP:" + String(buttonUp) + ",";
-    stringToReturn += " DOWN:" + String(buttonDown) + ",";
-    stringToReturn += " LEFT:" + String(buttonLeft) + ",";
-    stringToReturn += " RIGHT:" + String(buttonRight);
-    stringToReturn += "]";
+    output += "NESInput:[";
+    output += "A:" + String(buttonA) + ",";
+    output += " B:" + String(buttonB) + ",";
+    output += " SELECT:" + String(buttonSelect) + ",";
+    output += " START:" + String(buttonStart) + ",";
+    output += " UP:" + String(buttonUp) + ",";
+    output += " DOWN:" + String(buttonDown) + ",";
+    output += " LEFT:" + String(buttonLeft) + ",";
+    output += " RIGHT:" + String(buttonRight);
+    output += "]";
 
     // Return the string.
-    return stringToReturn;
+    return output;
+}
+
+/**
+ * @brief Get a string representing the buttons that are pressed.
+ *
+ * @return String representing the buttons that are pressed.
+ */
+String NESInput::buttonsPressedAsString() {
+    // Create a string to store the pressed buttons.
+    String output;
+
+    // If the A button is pressed, add it to the string.
+    output += buttonA ? "A" : "";
+
+    // If the B button is pressed, add it to the string, if there is already a
+    // button in the string, add a comma before the button.
+    output += buttonB ? ((output != "") ? ", B" : "B") : "";
+
+    // If the SELECT button is pressed, add it to the string, if there is
+    // already a button in the string, add a comma before the button.
+    output += buttonSelect ? ((output != "") ? ", SELECT" : "SELECT") : "";
+
+    // If the START button is pressed, add it to the string, if there is
+    // already a button in the string, add a comma before the button.
+    output += buttonStart ? ((output != "") ? ", START" : "START") : "";
+
+    // If the UP button is pressed, add it to the string, if there is already a
+    // button in the string, add a comma before the button.
+    output += buttonUp ? ((output != "") ? ", UP" : "UP") : "";
+
+    // If the DOWN button is pressed, add it to the string, if there is already
+    // a button in the string, add a comma before the button.
+    output += buttonDown ? ((output != "") ? ", DOWN" : "DOWN") : "";
+
+    // If the LEFT button is pressed, add it to the string, if there is already
+    // a button in the string, add a comma before the button.
+    output += buttonLeft ? ((output != "") ? ", LEFT" : "LEFT") : "";
+
+    // If the RIGHT button is pressed, add it to the string, if there is already
+    // a button in the string, add a comma before the button.
+    output += buttonRight ? ((output != "") ? ", RIGHT" : "RIGHT") : "";
+
+    // Return the string.
+    return output;
 }
 
 /**

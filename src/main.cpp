@@ -31,7 +31,9 @@ void loop() {
     // Get the data from the NES controller, as a struct.
     NESInput input = nes.getNESInput();
 
-    Serial.println(input.statesAsString());
+    if (input.anyButtonPressed()) {
+        Serial.println(input.buttonsPressedAsString());
+    }
 
     // This is the configuration for the game Bit Blaster XL.
     updateKey(input.buttonA, KEY_LEFT_CTRL);

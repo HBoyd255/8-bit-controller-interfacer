@@ -39,6 +39,13 @@ struct NESInput {
      * @return String representing the state of the NESInput object.
      */
     String statesAsString();
+
+    /**
+     * @brief Get a string representing the buttons that are pressed.
+     *
+     * @return String representing the buttons that are pressed.
+     */
+    String buttonsPressedAsString();
 };
 
 /**
