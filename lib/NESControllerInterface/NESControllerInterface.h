@@ -13,17 +13,20 @@
 #include <Arduino.h>
 
 /**
- * @brief A struct to store the values of the NES controller buttons.
+ * @brief A bitfield struct to store the values of the NES controller buttons.
+ *
+ * Storing this as a bitfield struct saves memory, as each boolean value would
+ * take up a byte if stored individually.
  */
 struct NESInput {
-    bool buttonA;
-    bool buttonB;
-    bool buttonSelect;
-    bool buttonStart;
-    bool buttonUp;
-    bool buttonDown;
-    bool buttonLeft;
-    bool buttonRight;
+    bool buttonA : 1;
+    bool buttonB : 1;
+    bool buttonSelect : 1;
+    bool buttonStart : 1;
+    bool buttonUp : 1;
+    bool buttonDown : 1;
+    bool buttonLeft : 1;
+    bool buttonRight : 1;
 
     /**
      * @brief Check if any button is pressed.

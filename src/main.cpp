@@ -47,34 +47,6 @@ void loop() {
 }
 
 /**
- * @brief Prints a byte of data as its individual bits.
- *
- * This function takes a byte and prints it to the serial port as its
- * individual 8 bits, starting with the most significant bit on the left.
- * Any leading zeros of the data are also printed. A separator can also be
- * provided to separate the bits, but is not required.
- *
- * for example,printByte(13) would print 00001101. and printByte(13,",")
- * would print 0,0,0,0,1,1,0,1.
- *
- * This function assumes that a serial connection has been initialised.
- *
- * @param byteToPrint The unsigned 8 bits of data to print to the serial
- * port.
- * @param separator The string to be printed between each bit.
- */
-void printByte(byte byteToPrint, String separator = "e") {
-    // Print the 7 leading bits of the byte, followed by the optional
-    // separator.
-    for (byte b = 7; b != 0; b--) {
-        Serial.print((byteToPrint >> b) & 1);
-        Serial.print(separator);
-    }
-    // Print the final bit, followed by a newline character.
-    Serial.println(byteToPrint & 1);
-}
-
-/**
  * @brief Updates the state of a key on the keyboard.
  *
  * @param key The key to update, as defined in the Keyboard library.
